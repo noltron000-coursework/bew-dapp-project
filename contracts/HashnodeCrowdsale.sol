@@ -33,14 +33,14 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
 
   // Constructor
   // ============
-  constructor HashnodeCrowdsale(uint256 _startTime, uint256 _endTime, uint256 _rate, address _wallet, uint256 _goal, uint256 _cap) CappedCrowdsale(_cap) FinalizableCrowdsale() RefundableCrowdsale(_goal) Crowdsale(_startTime, _endTime, _rate, _wallet) public {
+  constructor (uint256 _startTime, uint256 _endTime, uint256 _rate, address _wallet, uint256 _goal, uint256 _cap) CappedCrowdsale(_cap) FinalizableCrowdsale() RefundableCrowdsale(_goal) Crowdsale(_startTime, _endTime, _rate, _wallet) public {
     require(_goal <= _cap, "you have reached the limit; the 'goal' cannot exceed the 'cap'");
   }
   // =============
 
   // Token Deployment
   // =================
-  function createTokenContract() internal returns (MintableToken) {
+  function createTokenContract() internal returns (ERC20Mintable) {
     return new HashnodeToken(); // Deploys the ERC20 token. Automatically called when crowdsale contract is deployed
   }
   // ==================
