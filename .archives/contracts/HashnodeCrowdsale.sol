@@ -36,6 +36,12 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
   constructor (uint256 _startTime, uint256 _endTime, uint256 _rate, address _wallet, uint256 _goal, uint256 _cap) CappedCrowdsale(_cap) FinalizableCrowdsale() RefundableCrowdsale(_goal) Crowdsale(_startTime, _endTime, _rate, _wallet) public {
     require(_goal <= _cap, "you have reached the limit; the 'goal' cannot exceed the 'cap'");
   }
+  address owner;
+
+  modifier onlyOwner {
+    require(msg.sender == owner, "Only owner can call this function.");
+    _;
+  }
   // =============
 
   // Token Deployment
@@ -112,20 +118,20 @@ contract HashnodeCrowdsale is CappedCrowdsale, RefundableCrowdsale {
   // Finish: Mint Extra Tokens as needed before finalizing the Crowdsale.
   // ====================================================================
   function finish(address _teamFund, address _ecosystemFund, address _bountyFund) public onlyOwner {
-      require(!isFinalized, "this token has already been finalized!");
-      uint256 alreadyMinted = token.totalSupply();
-      require(alreadyMinted < maxTokens, "cannot create a new token; exceeds max number of tokens!");
+    // require(!isFinalized, "this token has already been finalized!");
+    uint256 alreadyMinted = token.totalSupply();
+    require(alreadyMinted < maxTokens, "cannot create a new token; exceeds max number of tokens!");
 
-      uint256 unsoldTokens = totalTokensForSale - alreadyMinted;
-      if (unsoldTokens > 0) {
-        tokensForEcosystem = tokensForEcosystem + unsoldTokens;
-      }
+    uint256 unsoldTokens = totalTokensForSale - alreadyMinted;
+    if (unsoldTokens > 0) {
+      tokensForEcosystem = tokensForEcosystem + unsoldTokens;
+    }
 
-      token.mint(_teamFund,tokensForTeam);
-      token.mint(_ecosystemFund,tokensForEcosystem);
-      token.mint(_bountyFund,tokensForBounty);
+    token.mint(_teamFund,tokensForTeam);
+    token.mint(_ecosystemFund,tokensForEcosystem);
+    token.mint(_bountyFund,tokensForBounty);
 
-      finalize();
+    finalize();
   }
   // ===============================
 
