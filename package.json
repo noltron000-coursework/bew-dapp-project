@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "erc721x": "^1.0.1"
+    "erc721x": "^1.0.1",
+    "openzeppelin-solidity": "^2.3.0"
   }
 }
