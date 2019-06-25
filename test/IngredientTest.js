@@ -34,8 +34,8 @@ contract('Ingredient', async function (accounts) {
 
     it('Should make first account an owner', async () => {
       // TODO:
-      // - What does deployed() do?
-      // - Where is from?
+      // What does deployed() do?
+      // Where is from?
       let instance = await Ingredient.deployed();
       let owner = await instance.owner();
       assert.equal(owner, accounts[0]);
@@ -47,8 +47,8 @@ contract('Ingredient', async function (accounts) {
       let zeroBalance = await instance.totalSupply();
       assert(
         // TODO:
-        // - What is toString()?
-        // - Why does it take in a parameter of 10?
+        // What is toString()?
+        // Why does it take in a parameter of 10?
         zeroBalance.toString(10) === '0',
         'Contract should have no tokens at this point'
       )
@@ -62,8 +62,8 @@ contract('Ingredient', async function (accounts) {
         const tokenId = '';
         await instance.mint(address, tokenId);
         // TODO:
-        // - What parameters would this take?
-        // - Where do they come from?
+        // What parameters would this take?
+        // Where do they come from?
       } catch (error) {
         console.log(error);
         assert(false, error);
@@ -97,17 +97,37 @@ contract('Ingredient', async function (accounts) {
 
     it('Should mint 24 slices of bread to the deli; for a bag of bread', async () => {
       let instance = await Ingredient.deployed();
-      // TODO: Write the code here to call a contract function
-    });
-
-    it('Should trade 1 slice of bread for another slice of bread properly', async () => {
-      let instance = await Ingredient.deployed();
-      // TODO: Write the code here to call a contract function
+      // TODO:
+      // mint 24 tokens of bread at the deli
+      // count the total supply of tokens, it should be 24
+      // count the deli's supply of tokens, it should be 24
     });
 
     it('Should trade 1 slice of bread for nothing correctly', async () => {
       let instance = await Ingredient.deployed();
-      // TODO: Write the code here to call a contract function
+      // TODO:
+      // define user1
+      // define user2
+      // mint 1 token of bread; give it to user1
+      // ensure user1 has a slice of bread
+      // ensure user2 has nothing
+      // trade between these tokens
+      // ensure user1 has nothing
+      // ensure user2 has a slice of bread
+    });
+
+    it('Should trade 1 slice of bread for another slice of bread properly', async () => {
+      let instance = await Ingredient.deployed();
+      // TODO:
+      // define user1
+      // define user2
+      // mint 1 token of bread; give it to user1
+      // mint 1 token of cheese; give it to user2
+      // ensure user1 has a slice of bread
+      // ensure user2 has a slice of cheese
+      // trade between these tokens
+      // ensure user1 has a slice of cheese
+      // ensure user2 has a slice of bread
     });
 
 /*
