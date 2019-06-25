@@ -76,7 +76,7 @@ contract('Ingredient', async function (accounts) {
         'Contract should have balance of 1 instead it has: ' + totalSupply.toString(10)
       );
 
-      // make sure the token at index 0 has id 1
+      // M\\ake sure the token at index 0 has id 1
       let tokenId = await instance.tokenOfOwnerByIndex(accounts[0], '0');
       assert(
         tokenId.toString(10) === '1',
@@ -108,12 +108,10 @@ contract('Ingredient', async function (accounts) {
       // TODO:
       // define user1
       // define user2
-      // mint 1 token of bread; give it to user1
-      // ensure user1 has a slice of bread
-      // ensure user2 has nothing
+      // mint 1 token of bread; set its owner to user1
+      // ensure bread is owned by user1
       // trade between these tokens
-      // ensure user1 has nothing
-      // ensure user2 has a slice of bread
+      // ensure bread is owned by user2
     });
 
     it('Should trade 1 slice of bread for another slice of bread properly', async () => {
@@ -121,13 +119,13 @@ contract('Ingredient', async function (accounts) {
       // TODO:
       // define user1
       // define user2
-      // mint 1 token of bread; give it to user1
-      // mint 1 token of cheese; give it to user2
-      // ensure user1 has a slice of bread
-      // ensure user2 has a slice of cheese
+      // mint 1 token of bread; set its owner to user1
+      // mint 1 token of cheese; set its owner to user2
+      // ensure bread is owned by user1
+      // ensure cheese is owned by user2
       // trade between these tokens
-      // ensure user1 has a slice of cheese
-      // ensure user2 has a slice of bread
+      // ensure cheese is owned by user1
+      // ensure bread is owned by user2
     });
 
 /*
