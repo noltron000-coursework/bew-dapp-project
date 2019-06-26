@@ -27,6 +27,11 @@ contract Ingredient is ERC721XToken, Ownable {
     return tokenToIndividualSupply[_tokenId];
   }
 
+  function batchMintTokens(uint[] _tokenIds, uint8[] _tokenSupplies) external onlyOwner {
+    for (uint i = 0; i < _tokenIds.length; i++) {
+      mintToken(_tokenIds[i], _tokenSupplies[i]);
+    }
+  }
   function mintToken(uint _tokenId, uint8 _supply) public onlyOwner {
     require(!exists(_tokenId), "Error: Token already exists");
     _mint(_tokenId, msg.sender, _supply);
