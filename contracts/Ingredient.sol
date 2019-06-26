@@ -8,7 +8,10 @@ import "node_modules/erc721x/contracts/Libraries/ObjectsLib.sol";
  */
 contract Ingredient is ERC721XToken, Ownable {
   
-  mapping (uint=>uint8) tokenToIndividualSupply;
+  mapping (uint=>uint8) internal tokenToIndividualSupply;
+  mapping (uint=>uint) internal tokenIdtoMouldId;
+
+  uint nftTokenIdIndex = 1000000;
 
   event TokenAwarded(uint indexed tokenId, address claimer, uint8 amount);
 
@@ -40,5 +43,24 @@ contract Ingredient is ERC721XToken, Ownable {
     
     _updateTokenBalance(_to, _tokenId, _amount, ObjectLib.Operations.ADD);
     emit TokenAwarded(_tokenId, _to, _amount);
+  }
+
+  function convertToNFT(uint _tokenId, uint8 amount) public {
+    require(tokenType[_tokenId] == FT);
+    require(_amount <= balanceOf(msg.sender, _tokenId), "You do not own enough tokens");
+    _updateTokenBalance(msg.sender, _tokenId, _amount, ObjectLib.Operations.SUB);
+    for (uint i = 0; i < _amount; i++) {
+      _mint(nftTokenIdIndex, msg.sender);
+      nftTokenIdToMouldId[nftTokenIdIndex] = _tokenId;
+      nftTokenIdIndex++;
+    }
+  }
+
+  function convertToFT(uint _tokenId) public {
+    require(tokenType[_tokenId] == NFT);
+    require(ownerOf(_tokenId) == msg.sender, "You do not own this token");
+    _updateTokenBalance(msg.sender, _tokenId, 0, ObjectLib.Operations.REPLACE);
+    _updateTokenBalance(msg.sender, nftTokenIdToMouldId[_tokenId], 1, ObjectLib.Operations.ADD);
+    emit TransferWithQuantity(address(this), msg.sender, nftTokenIdToMouldId[_tokenId], 1);
   }
 }
