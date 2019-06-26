@@ -1,8 +1,8 @@
 const Ingredient = artifacts.require('./Ingredient.sol');
 const _ = '        ';
 
-
 contract('Ingredient', async function (accounts) {
+  console.log(accounts)
   let token;
 
   before(done => {
@@ -36,6 +36,10 @@ contract('Ingredient', async function (accounts) {
       // TODO:
       // What does deployed() do?
       // Where is from?
+      // ***
+      // NOTE:
+      // creates instance
+      // creator owns the instance (me)
       let instance = await Ingredient.deployed();
       let owner = await instance.owner();
       assert.equal(owner, accounts[0]);
@@ -49,6 +53,9 @@ contract('Ingredient', async function (accounts) {
         // TODO:
         // What is toString()?
         // Why does it take in a parameter of 10?
+        // ***
+        // NOTE:
+        // its converting to base 10.
         zeroBalance.toString(10) === '0',
         'Contract should have no tokens at this point'
       )
@@ -58,7 +65,12 @@ contract('Ingredient', async function (accounts) {
       let instance = await Ingredient.deployed();
       // Try minting (baking) a new token
       try {
-        const address = '';
+        // heres your owner address
+        const instance = await Ingredient.deployed();
+        const owner = await instance.owner();
+        const address = owner;
+
+        // make a bread to get its tokenId
         const tokenId = '';
         await instance.mint(address, tokenId);
         // TODO:
@@ -76,13 +88,12 @@ contract('Ingredient', async function (accounts) {
         'Contract should have balance of 1 instead it has: ' + totalSupply.toString(10)
       );
 
-      // M\\ake sure the token at index 0 has id 1
+      // Make sure the token at index 0 has id 1
       let tokenId = await instance.tokenOfOwnerByIndex(accounts[0], '0');
       assert(
         tokenId.toString(10) === '1',
         'Token at index 0 is ' + tokenId.toString(10) // TODO: why 10?
       )
-
     });
 
     it("Should mint an item to the owner only", async () => {
@@ -112,6 +123,10 @@ contract('Ingredient', async function (accounts) {
       // ensure bread is owned by user1
       // trade between these tokens
       // ensure bread is owned by user2
+      // ***
+      // NOTE:
+      // accounts[0] is me
+      // accounts[1] is someone else
     });
 
     it('Should trade 1 slice of bread for another slice of bread properly', async () => {

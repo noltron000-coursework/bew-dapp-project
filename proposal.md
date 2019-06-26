@@ -18,3 +18,12 @@
 | Fri, June 21st | integrate w/ganache, environment set up, contract initialized, 1+ token working |
 | Fri, June 28th | basic react setup, *discover project trajectory*                                |
 | Fri, July 5th  | live frontend, can generate a token, has a basic frontend                       |
+
+## Token Attributes
+deli-type:
+	- bread
+	- meat
+	- cheese
+	- veggie
+	- sauce
+	- garnish
