@@ -7,7 +7,7 @@ import "node_modules/erc721x/contracts/Libraries/ObjectsLib.sol";
  * @title Common tier sandwich ingredients
  */
 contract Ingredient is ERC721XToken, Ownable {
-  
+
   mapping (uint=>uint8) internal tokenToIndividualSupply;
   mapping (uint=>uint) internal tokenIdtoMouldId;
 
@@ -15,29 +15,37 @@ contract Ingredient is ERC721XToken, Ownable {
 
   event TokenAwarded(uint indexed tokenId, address claimer, uint8 amount);
 
-  function name() returns(string) {
+  /// @notice returns the name type of the token, EX "Generic Ingredient"
+  function name() public returns(string) {
     return "Some Ingredient";
   }
 
-  function symbol() returns(string) {
+  /// @notice returns symbol for the type of token, EX "ING"
+  function symbol() public returns(string) {
     return "ING";
   }
-  
-  function individualSupply(uint _tokenId) {
+
+  /// @notice returns the quantity of minted tokens for the given type of token, EX "White Bread"
+  function individualSupply(uint _tokenId) public view returns(uint8) {
     return tokenToIndividualSupply[_tokenId];
   }
 
+  /// @notice mints several quantities of several given tokens
   function batchMintTokens(uint[] _tokenIds, uint8[] _tokenSupplies) external onlyOwner {
+    // TODO: make sure to check that the two arrays are equal length
     for (uint i = 0; i < _tokenIds.length; i++) {
       mintToken(_tokenIds[i], _tokenSupplies[i]);
     }
   }
+
+  /// @notice mints a quantity of a given token
   function mintToken(uint _tokenId, uint8 _supply) public onlyOwner {
     require(!exists(_tokenId), "Error: Token already exists");
     _mint(_tokenId, msg.sender, _supply);
     tokenIdToIndividualSupply[_tokenId] = _supply;
   }
 
+  /// @notice 
   function awardToken(uint _tokenId, address _to, uint8 _amount) public onlyOwner {
     require(exists(_tokenId), "That token does not exist!");
 
