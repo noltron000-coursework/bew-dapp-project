@@ -2,7 +2,8 @@
 
 ## Overview
 1. [Project Repository](https://github.com/noltron000/bew-dapp-project)
-1. [proposal.md](https://github.com/noltron000/bew-dapp-project/blob/master/proposal.md), [README.md](https://github.com/noltron000/bew-dapp-project/blob/master/README.md)
+1. [proposal.md](https://github.com/noltron000/bew-dapp-project/blob/master/proposal.md)
+1. [README.md](https://github.com/noltron000/bew-dapp-project/blob/master/README.md)
 1. Details
   - **Token Protocol**: `ERC-721`. The protocol that we are using is *non-fungible*, which means an item on the blockchain using our contracts are all unique. No two items are alike! We originally wanted to use `ERC-721x`, which is *multi-fungible* &mdash; but found that the documentation was difficult for us, and that its implementation was not within the scope of our limited time.
     - Our game is a crafting game. Many of the base resources will be identical, or atleast quite similar. This is why we wanted to use `ERC-721x`, but it won't be too difficult to add a parameter or function to the `ERC-721` that declares an item's shared type, despite the fact that each item is unqiue.
