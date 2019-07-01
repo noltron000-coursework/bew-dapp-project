@@ -7,12 +7,9 @@ import "./TradeableERC721Token.sol";
 *** Ingredient - a contract for my non-fungible sandwich ingredients.
 **/
 contract Ingredient is TradeableERC721Token {
+
   constructor(address _proxyRegistryAddress) TradeableERC721Token("Ingredient", "SWI", _proxyRegistryAddress) public {
     // TODO:
     // why is this constructor empty?
-  }
-
-  function baseTokenURI() public view returns (string memory) {
-    return "https://distributed-deli.herokuapp.com";
   }
 }

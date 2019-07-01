@@ -1,8 +1,9 @@
 {
   "dependencies": {
     "erc721x": "^1.0.1",
-    "opensea-js": "^0.5.0-rc13",
+    "opensea-js": "^0.5.0-rc9",
     "openzeppelin-solidity": "^2.3.0",
-    "truffle-hdwallet-provider": "^1.0.12"
+    "truffle-hdwallet-provider": "^1.0.12",
+    "web3": "^1.0.0-beta.55"
   }
 }

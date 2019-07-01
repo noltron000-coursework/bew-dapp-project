@@ -55,7 +55,7 @@ contract TradeableERC721Token is ERC721Full, Ownable {
   }
 
   function baseTokenURI() public view returns (string memory) {
-    return "";
+    return "https://distributed-deli.herokuapp.com";
   }
 
   function tokenURI(uint256 _tokenId) external view returns (string memory) {
