@@ -12,7 +12,7 @@ contract IngredientFactory is Factory, Ownable {
   address public proxyRegistryAddress;
   address public nftAddress;
   // address public lootBoxNftAddress;
-  string public baseURI = "https://opensea-ingredients-api.herokuapp.com/api/factory/";
+  string public baseURI = "https://distributed-deli.herokuapp.com";
 
   /**
    * Enforce the existence of only 100 OpenSea ingredients.
@@ -49,7 +49,7 @@ contract IngredientFactory is Factory, Ownable {
   function numOptions() public view returns (uint256) {
     return NUM_OPTIONS;
   }
-  
+ 
   function mint(uint256 _optionId, address _toAddress) public {
     // Must be sent from the owner proxy or owner.
     ProxyRegistry proxyRegistry = ProxyRegistry(proxyRegistryAddress);
@@ -88,7 +88,7 @@ contract IngredientFactory is Factory, Ownable {
     }
     return ingredientSupply < (INGREDIENT_SUPPLY - numItemsAllocated);
   }
-  
+
   function tokenURI(uint256 _optionId) external view returns (string memory) {
     return Strings.strConcat(
         baseURI,
